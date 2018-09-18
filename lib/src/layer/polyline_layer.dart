@@ -35,16 +35,16 @@ class PolylineLayer extends StatelessWidget {
   PolylineLayer(this.polylineOpts, this.map);
 
   Widget build(BuildContext context) {
-    return new LayoutBuilder(
+    return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints bc) {
-        final size = new Size(bc.maxWidth, bc.maxHeight);
+        final size = Size(bc.maxWidth, bc.maxHeight);
         return _build(context, size);
       },
     );
   }
 
   Widget _build(BuildContext context, Size size) {
-    return new StreamBuilder<int>(
+    return StreamBuilder<int>(
       stream: map.onMoved, // a Stream<int> or null
       builder: (BuildContext context, _) {
         for (var polylineOpt in polylineOpts.polylines) {
@@ -53,9 +53,9 @@ class PolylineLayer extends StatelessWidget {
           for (var point in polylineOpt.points) {
             var pos = map.project(point);
             pos = pos.multiplyBy(map.getZoomScale(map.zoom, map.zoom)) - map.getPixelOrigin();
-            polylineOpt.offsets.add(new Offset(pos.x.toDouble(), pos.y.toDouble()));
+            polylineOpt.offsets.add(Offset(pos.x.toDouble(), pos.y.toDouble()));
             if (i > 0 && i < polylineOpt.points.length) {
-              polylineOpt.offsets.add(new Offset(pos.x.toDouble(), pos.y.toDouble()));
+              polylineOpt.offsets.add(Offset(pos.x.toDouble(), pos.y.toDouble()));
             }
             i++;
           }
@@ -64,15 +64,15 @@ class PolylineLayer extends StatelessWidget {
         var polylines = <Widget>[];
         for (var polylineOpt in this.polylineOpts.polylines) {
           polylines.add(
-            new CustomPaint(
-              painter: new PolylinePainter(polylineOpt),
+            CustomPaint(
+              painter: PolylinePainter(polylineOpt),
               size: size,
             ),
           );
         }
 
-        return new Container(
-          child: new Stack(
+        return Container(
+          child: Stack(
             children: polylines,
           ),
         );
@@ -92,11 +92,11 @@ class PolylinePainter extends CustomPainter {
     }
     final rect = Offset.zero & size;
     canvas.clipRect(rect);
-    final paint = new Paint()
+    final paint = Paint()
       ..color = polylineOpt.color
       ..strokeWidth = polylineOpt.strokeWidth;
     final borderPaint = polylineOpt.borderStrokeWidth > 0.0
-        ? (new Paint()
+        ? (Paint()
       ..color = polylineOpt.borderColor
       ..strokeWidth = polylineOpt.strokeWidth + polylineOpt.borderStrokeWidth)
         : null;

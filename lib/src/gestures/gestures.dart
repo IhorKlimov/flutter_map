@@ -30,9 +30,9 @@ abstract class MapGestureMixin extends State<FlutterMap>
   @override
   void initState() {
     super.initState();
-    _controller = new AnimationController(vsync: this)
+    _controller = AnimationController(vsync: this)
       ..addListener(_handleFlingAnimation);
-    _doubleTapController = new AnimationController(
+    _doubleTapController = AnimationController(
         vsync: this, duration: Duration(milliseconds: 200))
       ..addListener(_handleDoubleTapZoomAnimation);
   }
@@ -87,7 +87,7 @@ abstract class MapGestureMixin extends State<FlutterMap>
     if (magnitude < _kMinFlingVelocity) return;
     final Offset direction = details.velocity.pixelsPerSecond / magnitude;
     final double distance = (Offset.zero & context.size).shortestSide;
-    _flingAnimation = new Tween<Offset>(
+    _flingAnimation = Tween<Offset>(
             begin: _animationOffset,
             end: _animationOffset - direction * distance)
         .animate(_controller);
@@ -109,7 +109,7 @@ abstract class MapGestureMixin extends State<FlutterMap>
     // convert the point to global coordinates
     var localPoint = _offsetToPoint(details.globalPosition - boxOffset);
     var localPointCenterDistance =
-        new Point((width / 2) - localPoint.x, (height / 2) - localPoint.y);
+        Point((width / 2) - localPoint.x, (height / 2) - localPoint.y);
     var mapCenter = map.project(map.center);
     var point = mapCenter - localPointCenterDistance;
     var latlng = map.unproject(point);
@@ -132,11 +132,11 @@ abstract class MapGestureMixin extends State<FlutterMap>
 
     double newZoom = _mapZoomStart * dScale;
 
-    _doubleTapAnimation = new Tween<double>(
+    _doubleTapAnimation = Tween<double>(
       begin: _mapZoomStart,
       end: newZoom,
     )
-        .chain(new CurveTween(curve: Curves.fastOutSlowIn))
+        .chain(CurveTween(curve: Curves.fastOutSlowIn))
         .animate(_doubleTapController);
     _doubleTapController
       ..value = 0.0
@@ -154,18 +154,18 @@ abstract class MapGestureMixin extends State<FlutterMap>
     setState(() {
       _animationOffset = _flingAnimation.value;
       var newCenterPoint = map.project(_mapCenterStart) +
-          new Point(_animationOffset.dx, _animationOffset.dy);
+          Point(_animationOffset.dx, _animationOffset.dy);
       var newCenter = map.unproject(newCenterPoint);
       map.move(newCenter, map.zoom);
     });
   }
 
   Point _offsetToPoint(Offset offset) {
-    return new Point(offset.dx, offset.dy);
+    return Point(offset.dx, offset.dy);
   }
 
   Offset _pointToOffset(Point point) {
-    return new Offset(point.x.toDouble(), point.y.toDouble());
+    return Offset(point.x.toDouble(), point.y.toDouble());
   }
 
   @override

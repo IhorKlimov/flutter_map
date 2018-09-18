@@ -11,78 +11,78 @@ import '../pages/tap_to_add.dart';
 import '../pages/on_tap.dart';
 
 Drawer buildDrawer(BuildContext context, String currentRoute) {
-  return new Drawer(
-    child: new ListView(
+  return Drawer(
+    child: ListView(
       children: <Widget>[
         const DrawerHeader(
           child: const Center(
             child: const Text("Flutter Map Examples"),
           ),
         ),
-        new ListTile(
+        ListTile(
           title: const Text('OpenStreetMap'),
           selected: currentRoute == HomePage.route,
           onTap: () {
             Navigator.popAndPushNamed(context, HomePage.route);
           },
         ),
-        new ListTile(
+        ListTile(
           title: const Text('Add Pins'),
           selected: currentRoute == TapToAddPage.route,
           onTap: () {
             Navigator.popAndPushNamed(context, TapToAddPage.route);
           },
         ),
-        new ListTile(
+        ListTile(
           title: const Text('Esri'),
           selected: currentRoute == EsriPage.route,
           onTap: () {
             Navigator.popAndPushNamed(context, EsriPage.route);
           },
         ),
-        new ListTile(
+        ListTile(
           title: const Text('Polylines'),
           selected: currentRoute == PolylinePage.route,
           onTap: () {
             Navigator.popAndPushNamed(context, PolylinePage.route);
           },
         ),
-        new ListTile(
+        ListTile(
           title: const Text('MapController'),
           selected: currentRoute == MapControllerPage.route,
           onTap: () {
             Navigator.popAndPushNamed(context, MapControllerPage.route);
           },
         ),
-        new ListTile(
+        ListTile(
           title: const Text('Animated MapController'),
           selected: currentRoute == AnimatedMapControllerPage.route,
           onTap: () {
             Navigator.popAndPushNamed(context, AnimatedMapControllerPage.route);
           },
         ),
-        new ListTile(
+        ListTile(
           title: const Text('Marker Anchors'),
           selected: currentRoute == MarkerAnchorPage.route,
           onTap: () {
             Navigator.popAndPushNamed(context, MarkerAnchorPage.route);
           },
         ),
-        new ListTile(
+        ListTile(
           title: const Text('Plugins'),
           selected: currentRoute == PluginPage.route,
           onTap: () {
             Navigator.popAndPushNamed(context, PluginPage.route);
           },
         ),
-        new ListTile(
+        ListTile(
           title: const Text('Offline Map'),
           selected: currentRoute == OfflineMapPage.route,
           onTap: () {
             Navigator.popAndPushNamed(context, OfflineMapPage.route);
           },
         ),
-        new ListTile(
+        ListTile(
           title: const Text('OnTap'),
           selected: currentRoute == OnTapPage.route,
           onTap: () {

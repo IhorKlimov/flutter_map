@@ -6,33 +6,33 @@ import 'package:flutter_map/src/map/map.dart';
 
 class FlutterMapState extends MapGestureMixin {
   final MapControllerImpl mapController;
-  MapOptions get options => widget.options ?? new MapOptions();
+  MapOptions get options => widget.options ?? MapOptions();
   MapState mapState;
 
   FlutterMapState(this.mapController);
 
   initState() {
     super.initState();
-    mapState = new MapState(options);
+    mapState = MapState(options);
     mapController.state = mapState;
   }
 
   Widget build(BuildContext context) {
-    return new LayoutBuilder(
+    return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       mapState.size =
-          new Point<double>(constraints.maxWidth, constraints.maxHeight);
+          Point<double>(constraints.maxWidth, constraints.maxHeight);
       var layerWidgets = widget.layers
           .map((layer) => _createLayer(layer, widget.options.plugins))
           .toList();
-      return new GestureDetector(
+      return GestureDetector(
         onScaleStart: handleScaleStart,
         onScaleUpdate: handleScaleUpdate,
         onScaleEnd: handleScaleEnd,
         onTapUp: handleTapUp,
         onDoubleTap: handleDoubleTap,
-        child: new Container(
-          child: new Stack(
+        child: Container(
+          child: Stack(
             children: layerWidgets,
           ),
         ),
@@ -42,13 +42,13 @@ class FlutterMapState extends MapGestureMixin {
 
   Widget _createLayer(LayerOptions options, List<MapPlugin> plugins) {
     if (options is TileLayerOptions) {
-      return new TileLayer(options: options, mapState: mapState);
+      return TileLayer(options: options, mapState: mapState);
     }
     if (options is MarkerLayerOptions) {
-      return new MarkerLayer(options, mapState);
+      return MarkerLayer(options, mapState);
     }
     if (options is PolylineLayerOptions) {
-      return new PolylineLayer(options, mapState);
+      return PolylineLayer(options, mapState);
     }
     for (var plugin in plugins) {
       if (plugin.supportsLayer(options)) {

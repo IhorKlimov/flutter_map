@@ -21,13 +21,13 @@ Configure the map using `MapOptions` and layer options:
 
 ```dart
   Widget build(BuildContext context) {
-    return new FlutterMap(
-      options: new MapOptions(
-        center: new LatLng(51.5, -0.09),
+    return FlutterMap(
+      options: MapOptions(
+        center: LatLng(51.5, -0.09),
         zoom: 13.0,
       ),
       layers: [
-        new TileLayerOptions(
+        TileLayerOptions(
           urlTemplate: "https://api.tiles.mapbox.com/v4/"
               "{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}",
           additionalOptions: {
@@ -35,15 +35,15 @@ Configure the map using `MapOptions` and layer options:
             'id': 'mapbox.streets',
           },
         ),
-        new MarkerLayerOptions(
+        MarkerLayerOptions(
           markers: [
-            new Marker(
+            Marker(
               width: 80.0,
               height: 80.0,
-              point: new LatLng(51.5, -0.09),
+              point: LatLng(51.5, -0.09),
               builder: (ctx) =>
-              new Container(
-                child: new FlutterLogo(),
+              Container(
+                child: FlutterLogo(),
               ),
             ),
           ],
@@ -66,7 +66,7 @@ The example uses OpenStreetMap tiles, which are free but can be slow.
 Use TileLayerOptions to configure other tile providers, such as [mapbox]:
 
 ```dart
-new TileLayerOptions(
+TileLayerOptions(
   urlTemplate: "https://api.mapbox.com/v4/"
       "{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}",
   additionalOptions: {
@@ -90,9 +90,9 @@ To use, you'll need a mapbox key:
 [Follow this guide to grab offline tiles](https://tilemill-project.github.io/tilemill/docs/guides/osm-bright-mac-quickstart/)<br>
 Once you have your map exported to `.mbtiles`, you can use [mbtilesToPng](https://github.com/alfanhui/mbtilesToPngs) to unpack into `/{z}/{x}/{y}.png`. Move this to Assets folder and add  Asset directories to `pubspec.yaml`. Minimum required fields for offline maps are:
 ```
-new FlutterMap(
-  options: new MapOptions(
-    center: new LatLng(56.704173, 11.543808),
+FlutterMap(
+  options: MapOptions(
+    center: LatLng(56.704173, 11.543808),
     minZoom: <offline map minimum zoom>,
     maxZoom: <offline map maximum zoom>,
     zoom: 13.0,
@@ -100,7 +100,7 @@ new FlutterMap(
     nePanBoundary: LatLng(56.7378, 11.6644),
   ),
   layers: [
-    new TileLayerOptions(
+    TileLayerOptions(
       offlineMode: true,
       maxZoom: <offline map maximum zoom>,
       urlTemplate: "assets/offlineMap/{z}/{x}/{y}.png",

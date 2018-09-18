@@ -45,10 +45,10 @@ class FlutterMap extends StatefulWidget {
     @required this.options,
     this.layers,
     MapController mapController,
-  })  : _mapController = mapController ?? new MapController(),
+  })  : _mapController = mapController ?? MapController(),
         super(key: key);
 
-  FlutterMapState createState() => new FlutterMapState(_mapController);
+  FlutterMapState createState() => FlutterMapState(_mapController);
 }
 
 abstract class MapController {
@@ -64,7 +64,7 @@ abstract class MapController {
   LatLngBounds get bounds;
   double get zoom;
 
-  factory MapController() => new MapControllerImpl();
+  factory MapController() => MapControllerImpl();
 }
 
 typedef TapCallback(LatLng point);
@@ -100,7 +100,7 @@ class MapOptions {
     this.swPanBoundary,
     this.nePanBoundary,
   }) {
-    if (center == null) center = new LatLng(50.5, 30.51);
+    if (center == null) center = LatLng(50.5, 30.51);
     assert(!isOutOfBounds(center)); //You cannot start outside pan boundary
   }
 
